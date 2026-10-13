@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Morse</string>
+    <string name="settings_alias_label">Morse settings</string>
+    <string name="listener_label">Morse notification dots &amp; music</string>
+</resources>

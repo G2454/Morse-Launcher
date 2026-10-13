@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Platform theme with no action bar. The launcher draws its own (static) background,
+        so the system wallpaper is hidden unless "System wallpaper" is chosen in settings.
+    -->
+    <style name="Theme.Morse" parent="android:Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/morse_ground</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Activity</item>
+    </style>
+</resources>

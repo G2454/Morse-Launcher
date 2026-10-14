@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -269,7 +270,7 @@ private fun AlphabetList(
     Row(Modifier.fillMaxSize()) {
         LazyColumn(
             state = listState,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1f).testTag("library-az"),
             contentPadding = PaddingValues(start = 24.dp, end = 8.dp, bottom = 40.dp),
         ) {
             sections.forEach { section ->
@@ -294,7 +295,9 @@ private fun AlphabetList(
                     Morse.type.mono(9.5.sp, tracking = 0f),
                     color = if (target != null) c.text else c.text3.copy(alpha = 0.5f),
                     modifier = if (target != null) {
-                        Modifier.clickable { scope.launch { listState.scrollToItem(target) } }
+                        Modifier
+                            .semantics { contentDescription = "Jump to $letter" }
+                            .clickable { scope.launch { listState.scrollToItem(target) } }
                     } else {
                         Modifier
                     },

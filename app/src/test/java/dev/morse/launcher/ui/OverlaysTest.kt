@@ -2,7 +2,11 @@ package dev.morse.launcher.ui
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -130,6 +134,10 @@ class OverlaysTest {
         compose.onNodeWithContentDescription("Camera").performClick()
         assertEquals(TestData.camera, launched)
         compose.onNodeWithText("A – Z").performClick()
+        compose.onNodeWithTag("library-az").assertExists()
+        compose.onNodeWithText("Calculator").assertExists()
+        // Zine is below the fold on the small test screen; the letter rail scrolls to it.
+        compose.onNodeWithContentDescription("Jump to Z").performSemanticsAction(SemanticsActions.OnClick)
         compose.onNodeWithText("Zine").assertExists()
     }
 
@@ -169,7 +177,7 @@ class OverlaysTest {
                 )
             }
         }
-        compose.onNodeWithText("App info").performClick()
+        compose.onNode(hasText("App info") and hasClickAction()).performSemanticsAction(SemanticsActions.OnClick)
         assertTrue(ran)
         compose.onNodeWithTag("menu").performTouchInput { click(Offset(8f, 8f)) }
         assertTrue(dismissed)

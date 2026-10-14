@@ -124,7 +124,9 @@ fun BottomSheetLayer(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp))
                 .background(if (c.isDark) Color(0xFF141414) else c.surface)
-                .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) {}
+                // Swallow taps on the sheet body so they don't dismiss it, without
+                // exposing the whole sheet as a clickable node to accessibility.
+                .pointerInput(Unit) { detectTapGestures { } }
                 .windowInsetsPadding(WindowInsets.navigationBars)
                 .padding(start = 24.dp, end = 24.dp, top = 10.dp, bottom = 20.dp),
         ) {

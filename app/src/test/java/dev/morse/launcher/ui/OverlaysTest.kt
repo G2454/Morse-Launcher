@@ -134,7 +134,7 @@ class OverlaysTest {
         compose.onNodeWithContentDescription("Camera").performClick()
         assertEquals(TestData.camera, launched)
         compose.onNodeWithText("A – Z").performClick()
-        compose.onNodeWithTag("library-az").assertExists()
+        compose.onNodeWithTag("library-az", useUnmergedTree = true).assertExists()
         compose.onNodeWithText("Calculator").assertExists()
         // Zine is below the fold on the small test screen; the letter rail scrolls to it.
         compose.onNodeWithContentDescription("Jump to Z").performSemanticsAction(SemanticsActions.OnClick)

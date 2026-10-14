@@ -83,7 +83,10 @@ class WidgetHostManager(private val context: Context) {
                 targetColumns = tc,
                 targetRows = tr,
             )
-        }.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, { it.appLabel }).thenBy(String.CASE_INSENSITIVE_ORDER) { it.label })
+        }.sortedWith(
+            Comparator<ProviderEntry> { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.appLabel, b.appLabel) }
+                .thenComparator { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.label, b.label) },
+        )
     }
 
     fun allocateId(): Int = host.allocateAppWidgetId()

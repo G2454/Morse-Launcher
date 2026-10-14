@@ -122,7 +122,7 @@ class AppsRepository(
             }
         }
         infos.keys.retainAll(seen)
-        result.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.label })
+        result.sortWith { a, b -> String.CASE_INSENSITIVE_ORDER.compare(a.label, b.label) }
 
         val roles = HashMap<Role, AppKey>()
         roleByPackage.forEach { (pkg, role) ->
